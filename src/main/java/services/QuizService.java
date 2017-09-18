@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * @author Daniel Klock
- * @version 0.1.0
+ * @version 0.1.1
  *
  * REST service class that defines operations available for the Quiz resource.
  * This class defines those operations based on the CRUD standard.
@@ -19,13 +19,13 @@ import java.util.Map;
 @Path("/quiz/")
 public class QuizService {
     // TODO: Implement a database solution.
-    // TODO: Implement autorization and authentication.
+    // TODO: Implement authorization and authentication.
     private static final Map<Integer, Quiz> quizzes = new HashMap<>();
 
     /**
      * List all quizzes.
      * @return Returns a {@code List} that contains all the {@code Quiz} objects,
-     *         in a JSON format.
+     *         on the server. This list is converted to JSON by Jax-RS.
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -67,7 +67,7 @@ public class QuizService {
 
     /**
      * Update the data of an existing quiz.
-     * @throws NotFoundException - If the given quiz is not found in the map.
+     * @throws NotFoundException - If the given id is not found in the database.
      * @param id    - The id of the quiz to change.
      * @param quiz  - The new {@code Quiz} object.
      */
@@ -77,7 +77,7 @@ public class QuizService {
     public void updateQuiz(@PathParam("id") int id, Quiz quiz) {
         Quiz found = quizzes.get(id);
         if (found == null) {
-            throw new NotFoundException("Could not find a quiz with id " + quiz.getId() + ".");
+            throw new NotFoundException("Could not find a quiz with id " + id + ".");
         }
         found.setDuration(quiz.getDuration());
         found.setQuestions(quiz.getQuestions());
