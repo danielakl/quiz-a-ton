@@ -7,19 +7,22 @@ import java.io.Serializable;
 
 /**
  * @author Daniel Klock
- * @version 1.1.0
+ * @version 0.1.0
  *
- * User bean class following official JavaBean specification found at:
+ * Question bean class following official JavaBean specification found at:
  * "http://www.oracle.com/technetwork/articles/javaee/spec-136004.html".
  */
 @Deprecated
 @XmlAccessorType(XmlAccessType.FIELD)
-public class User implements Serializable {
+public class Answer implements Serializable {
     @XmlElement(name = "id")
     private int id;
 
-    @XmlElement(name = "nickname")
-    private String nickname;
+    @XmlElement(name = "answer")
+    private String answer;
+
+    @XmlElement(name = "points")
+    private int points;
 
     /*
      * Getters
@@ -28,8 +31,12 @@ public class User implements Serializable {
         return id;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getAnswer() {
+        return answer;
+    }
+
+    public int getPoints() {
+        return points;
     }
 
     /*
@@ -39,7 +46,11 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public void setPoints(int point) {
+        this.points = point;
     }
 }

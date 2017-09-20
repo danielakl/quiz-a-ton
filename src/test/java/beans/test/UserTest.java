@@ -7,8 +7,9 @@ import org.junit.Test;
 
 /**
  * @author Daniel Klock
- * @version 0.1.0
+ * @version 1.1.0
  */
+@Deprecated
 public class UserTest {
     private final User user = new User();
 

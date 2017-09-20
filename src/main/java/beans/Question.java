@@ -9,7 +9,10 @@ import java.util.List;
 
 /**
  * @author Daniel Klock
- * @version 0.1.0
+ * @version 1.1.0
+ *
+ * Question bean class following official JavaBean specification found at:
+ * "http://www.oracle.com/technetwork/articles/javaee/spec-136004.html".
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Question implements Serializable {
@@ -19,11 +22,20 @@ public class Question implements Serializable {
     @XmlElement(name = "question")
     private String question;
 
+    @XmlElement(name = "imageURL")
+    private String imageURL;
+
     @XmlElement(name = "answers")
     private List<String> answers = new ArrayList<>();
 
+    @XmlElement(name = "points")
+    private int points;
+
     @XmlElement(name = "correctAnswerIndex")
     private int correctAnswerIndex;
+
+    @XmlElement(name = "duration")
+    private int duration;
 
     /*
      * Getters
@@ -36,12 +48,24 @@ public class Question implements Serializable {
         return question;
     }
 
+    public String getImageURL() {
+        return imageURL;
+    }
+
     public List<String> getAnswers() {
         return answers;
     }
 
+    public int getPoints() {
+        return points;
+    }
+
     public int getCorrectAnswerIndex() {
         return correctAnswerIndex;
+    }
+
+    public int getDuration() {
+        return duration;
     }
 
     /*
@@ -55,11 +79,23 @@ public class Question implements Serializable {
         this.question = question;
     }
 
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
     public void setAnswers(List<String> answers) {
         this.answers = answers;
     }
 
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
     public void setCorrectAnswerIndex(int correctAnswerIndex) {
         this.correctAnswerIndex = correctAnswerIndex;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }

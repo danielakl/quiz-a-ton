@@ -11,11 +11,12 @@ import java.util.Map;
 
 /**
  * @author Daniel Klock
- * @version 0.1.0
+ * @version 1.1.0
  *
  * REST service class that defines operations available for the User resource.
  * This class defines those operations based on the CRUD standard.
  */
+@Deprecated
 @Path("/user/")
 public class UserService {
     // TODO: Implement a database solution.

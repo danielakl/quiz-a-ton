@@ -4,8 +4,9 @@ import org.junit.Before;
 
 /**
  * @author Daniel Klock
- * @version 0.1.0
+ * @version 1.1.0
  */
+@Deprecated
 public class UserServiceTest {
     @Before
     public void setUp() throws Exception {
