@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * @author Daniel Klock
- * @version 1.1.1
+ * @version 1.2.1
  *
  * REST service class that defines operations available for the Quiz resource.
  * This class defines those operations based on the CRUD standard.

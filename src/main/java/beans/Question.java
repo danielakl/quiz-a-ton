@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author Daniel Klock
- * @version 1.1.0
+ * @version 1.1.1
  *
  * Question bean class following official JavaBean specification found at:
  * "http://www.oracle.com/technetwork/articles/javaee/spec-136004.html".

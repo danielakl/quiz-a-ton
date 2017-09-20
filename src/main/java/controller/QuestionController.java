@@ -10,6 +10,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Daniel Klock
+ * @version 0.1.0
+ *
+ * Controller class for questions, manages the logic related to questions for
+ * CRUD operations. Manages temporal storage, and updating and retrieving
+ * data from database through a DAO for questions.
+ */
 public class QuestionController {
     private static final QuizController quizController = new QuizController();
     private static final QuestionDAO questionDAO = new QuestionDAO(); // TODO: Implement a database solution.

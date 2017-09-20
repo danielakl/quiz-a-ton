@@ -12,7 +12,11 @@ import java.util.Map;
 
 /**
  * @author Daniel Klock
- * @version 0.1.0
+ * @version 1.1.0
+ *
+ * Controller class for quizzes, manages the logic related to quizzes for CRUD
+ * operations. Manages temporal storage, and updating and retrieving data from
+ * database through a DAO for quizzes.
  */
 public class QuizController {
     private static final QuizDAO quizDAO = new QuizDAO(); // TODO: Implement a database solution.
