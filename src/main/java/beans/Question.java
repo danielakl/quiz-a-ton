@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,16 +25,16 @@ public class Question implements Serializable {
     private String imageURL;
 
     @XmlElement(name = "answers")
-    private List<String> answers = new ArrayList<>();
+    private List<String> answers;
 
     @XmlElement(name = "points")
-    private int points;
+    private int points = -1;
 
     @XmlElement(name = "correctAnswerIndex")
-    private int correctAnswerIndex;
+    private int correctAnswerIndex = -1;
 
     @XmlElement(name = "duration")
-    private int duration;
+    private int duration = 10;
 
     /*
      * Getters

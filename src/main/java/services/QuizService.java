@@ -26,7 +26,7 @@ public class QuizService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Quiz> getQuizzes() {
-        return quizController.getQizzes();
+        return quizController.getQuizzes();
     }
 
     /**
