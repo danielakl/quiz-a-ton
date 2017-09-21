@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * @author Daniel Klock
- * @version 0.1.0
+ * @version 1.1.0
  *
  * Controller class for questions, manages the logic related to questions for
  * CRUD operations. Manages temporal storage, and updating and retrieving
@@ -171,5 +171,22 @@ public class QuestionController {
     public void deleteQuestion(int id) {
         // TODO: Remove question from database.
         questions.remove(id);
+    }
+
+    /**
+     * Delete a question given an ID and a quiz ID.
+     * @param quizId        - The ID of the quiz to delete a question for.
+     * @param questionId    - The ID of the question to delete.
+     */
+    public void deleteQuestion(int quizId, int questionId) {
+        // Check that quiz with given ID exists.
+        Quiz quiz = quizController.getQuiz(quizId);
+        if (quiz == null) {
+            throw new NotFoundException("Can not find a quiz with id of " + quizId + ".");
+        }
+
+        quiz.getQuestions().remove(questionId);
+
+        deleteQuestion(questionId);
     }
 }

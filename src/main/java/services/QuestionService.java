@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * @author Daniel Klock
- * @version 0.2.0
+ * @version 1.2.0
  *
  * REST service class that defines operations available for the Question resource.
  * This class defines those operations based on the CRUD standard.
@@ -72,11 +72,12 @@ public class QuestionService {
     /**
      * Delete a question.
      *
-     * @param id - The ID of the question to delete.
+     * @param quizId        - The ID of the quiz the question is apart of.
+     * @param questionId    - The ID of the question to delete.
      */
     @DELETE
     @Path("/{questionId}")
-    public void deleteQuestion(@PathParam("questionId") int id) {
-        questionController.deleteQuestion(id);
+    public void deleteQuestion(@PathParam("quizId") int quizId, @PathParam("questionId") int questionId) {
+        questionController.deleteQuestion(quizId, questionId);
     }
 }

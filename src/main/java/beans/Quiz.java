@@ -5,12 +5,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Daniel Klock
- * @version 1.1.0
+ * @version 1.2.0
  *
  * Quiz bean class following official JavaBean specification found at:
  * "http://www.oracle.com/technetwork/articles/javaee/spec-136004.html".
@@ -27,13 +26,13 @@ public class Quiz implements Serializable {
     private String creator;
 
     @XmlElement(name = "startTime")
-    private LocalDateTime startTime;
+    private Date startTime;
 
     @XmlElement(name = "questions")
     private List<Integer> questions;
 
-    @XmlElement(name = "scoreBoard")
-    private Map<String, Integer> scoreBoard;
+    @XmlElement(name = "playerList")
+    private List<Player> playerList;
 
     /*
      * Getters
@@ -50,7 +49,7 @@ public class Quiz implements Serializable {
         return creator;
     }
 
-    public LocalDateTime getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
@@ -58,8 +57,8 @@ public class Quiz implements Serializable {
         return questions;
     }
 
-    public Map<String, Integer> getScoreBoard() {
-        return scoreBoard;
+    public List<Player> getPlayerList() {
+        return playerList;
     }
 
     /*
@@ -77,7 +76,7 @@ public class Quiz implements Serializable {
         this.creator = creator;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
@@ -85,7 +84,7 @@ public class Quiz implements Serializable {
         this.questions = questions;
     }
 
-    public void setScoreBoard(Map<String, Integer> scoreBoard) {
-        this.scoreBoard = scoreBoard;
+    public void setPlayerList(List<Player> scoreBoard) {
+        this.playerList = playerList;
     }
 }

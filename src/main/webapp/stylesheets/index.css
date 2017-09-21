@@ -1,0 +1,77 @@
+body {
+    background-color: #e1e1e1;
+}
+
+.slideShow {
+    mix-blend-mode:multiply;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;         /* Images behind all other content */
+    list-style: none;   /* Remove bullet point */
+    margin: 0;
+    padding: 0;
+}
+
+.slideShow li {
+    width: inherit;                 /* Inherit from .slideShow */
+    height: inherit;                /* Inherit from .slideShow */
+    position: absolute;
+    top: inherit;                   /* Inherit from .slideShow */
+    left: inherit;                  /* Inherit from .slideShow */
+    background: no-repeat 50% 50%;  /* Centers images, no h. or v. repeat */
+    background-size: cover;         /* Allows images to take full space */
+    opacity: 0;                     /* Using animation to increase opacity */
+    z-index: inherit;
+    animation: imageAnimation 30s linear infinite;
+}
+
+/* Images used for slide show animation */
+.slideShow li:nth-child(1) {
+    background-image: url("../assets/images/slideshow/quiz1.jpg");
+}
+
+.slideShow li:nth-child(2) {
+    background-image: url("../assets/images/slideshow/quiz2.jpg");
+    animation-delay: 10s;
+}
+
+.slideShow li:nth-child(3) {
+    background-image: url("../assets/images/slideshow/quiz3.jpg");
+    animation-delay: 20s;
+}
+
+/* Animation for slide show */
+@keyframes imageAnimation {
+    0% {
+        opacity: 0;
+        animation-timing-function: ease-in;
+    }
+
+    10% {
+        opacity: 1;
+        animation-timing-function: ease-out;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+#landingHeader {
+    z-index: 1;             /* Header in front of images */
+    position: relative;
+    text-align: center;
+    margin-top: 40vh;
+}
+
+#landingHeader h1 {
+    color: #fff;
+}
+  

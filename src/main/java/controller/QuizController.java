@@ -1,18 +1,16 @@
 package controller;
 
+import beans.Player;
 import beans.Quiz;
 import dao.QuizDAO;
 
 import javax.ws.rs.NotFoundException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Daniel Klock
- * @version 1.1.0
+ * @version 1.2.0
  *
  * Controller class for quizzes, manages the logic related to quizzes for CRUD
  * operations. Manages temporal storage, and updating and retrieving data from
@@ -81,16 +79,16 @@ public class QuizController {
         // Get new data.
         String name = quiz.getName();
         String creator = quiz.getCreator();
-        LocalDateTime startTime = quiz.getStartTime();
+        Date startTime = quiz.getStartTime();
         List<Integer> questions = quiz.getQuestions();
-        Map<String, Integer> scoreBoard = quiz.getScoreBoard();
+        List<Player> playerList = quiz.getPlayerList();
 
         // Update with new information if available.
         found.setName((name != null) ? name : found.getName());
         found.setCreator((creator != null) ? creator : found.getCreator());
         found.setStartTime((startTime != null) ? startTime : found.getStartTime());
         found.setQuestions((questions != null) ? questions : found.getQuestions());
-        found.setScoreBoard((scoreBoard != null) ? scoreBoard : quiz.getScoreBoard());
+        found.setPlayerList((playerList != null) ? playerList : quiz.getPlayerList());
 
         // TODO: Update database with altered object.
         quizzes.put(id, found);

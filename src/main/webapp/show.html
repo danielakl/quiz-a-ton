@@ -1,15 +1,48 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Quiz-A-Ton</title>
-    
+
     <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png"/>
+
     <link rel="stylesheet" href="stylesheets/semantic.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+    </script>
+    <script defer src="javascripts/restQuiz.js"></script>
+    <script defer src="javascripts/show.js"></script>
 </head>
 <body>
+    <div class="ui container">
+        <header class="ui message">
+            <h1 class="ui header">Quiz-A-Ton</h1>
+            <p>Pick a quiz or make one and invite your friends.</p>
+        </header>
 
+        <div id="quizBox" class="ui raised loading segment">
+            <div id="quizList" class="ui big middle aligned selection list">
+                <!--<div class="item">-->
+                    <!--<div class="content">-->
+                        <!--<div class="header">Quiz Title</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="item">-->
+                    <!--<div class="content">-->
+                        <!--<div class="header">Quiz Title 2</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="item">-->
+                    <!--<div class="content">-->
+                        <!--<div class="header">The Quizzening</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
 </body>
 </html>
