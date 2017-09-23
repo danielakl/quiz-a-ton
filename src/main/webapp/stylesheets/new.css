@@ -1,0 +1,17 @@
+.column {
+    max-width: 550px;
+    margin-top: 5%;
+    height: 100%;
+}
+
+h1.ui.header {
+    text-align: center;
+}
+
+.ui.header {
+    text-transform: capitalize;
+}
+
+#addQuizButtonBox {
+    margin: 2% 0;
+}

@@ -29,7 +29,7 @@ public class Quiz implements Serializable {
     private Date startTime;
 
     @XmlElement(name = "questions")
-    private List<Integer> questions;
+    private List<Question> questions;
 
     @XmlElement(name = "playerList")
     private List<Player> playerList;
@@ -53,7 +53,7 @@ public class Quiz implements Serializable {
         return startTime;
     }
 
-    public List<Integer> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
@@ -80,7 +80,7 @@ public class Quiz implements Serializable {
         this.startTime = startTime;
     }
 
-    public void setQuestions(List<Integer> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 

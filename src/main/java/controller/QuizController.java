@@ -1,6 +1,7 @@
 package controller;
 
 import beans.Player;
+import beans.Question;
 import beans.Quiz;
 import dao.QuizDAO;
 
@@ -18,6 +19,7 @@ import java.util.*;
  */
 public class QuizController {
     private static final QuizDAO quizDAO = new QuizDAO(); // TODO: Implement a database solution.
+    private static int lastId = 0;
     private static final Map<Integer, Quiz> quizzes = new HashMap<>();
 
     /**
@@ -56,6 +58,12 @@ public class QuizController {
      * @param quiz - The java bean to base the new quiz on.
      */
     public void createQuiz(Quiz quiz) {
+        if (quiz == null) {
+            throw new NullPointerException("Quiz object can not be null.");
+        }
+
+        quiz.setId(++lastId);
+
         // TODO: Create quiz in database.
         quizzes.putIfAbsent(quiz.getId(), quiz);
     }
@@ -80,7 +88,7 @@ public class QuizController {
         String name = quiz.getName();
         String creator = quiz.getCreator();
         Date startTime = quiz.getStartTime();
-        List<Integer> questions = quiz.getQuestions();
+        List<Question> questions = quiz.getQuestions();
         List<Player> playerList = quiz.getPlayerList();
 
         // Update with new information if available.

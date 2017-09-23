@@ -2,7 +2,7 @@
 
 /**
  * RESTQuestion has methods to send AJAX requests to an Web API.
- * @param quizId    {int} the ID of the quiz to use for context.
+ * @param {int} quizId - the ID of the quiz to use for context.
  * @constructor
  */
 function RESTQuestion(quizId) {
@@ -10,8 +10,16 @@ function RESTQuestion(quizId) {
 }
 
 /**
+ * @callback callback
+ * @param {*} data              - formatted according to the dataType given to AJAX.
+ * @param {string} errorThrown  - HTTP status text.
+ * @param {string} textStatus   -
+ * @param {jqXHR} jqXHR         - jQuery XMLHttpRequest object.
+ */
+
+/**
  * Get all questions.
- * @param callback  {function} to call once the request succeeds or fails.
+ * @param {callback} callback - to call once the request succeeds or fails.
  */
 RESTQuestion.prototype.getQuestions = function(callback) {
     $.ajax("api/quiz/" + this.quizId + "/question/", {
@@ -28,8 +36,8 @@ RESTQuestion.prototype.getQuestions = function(callback) {
 
 /**
  * Get a question.
- * @param id        {int} the ID of the question to get.
- * @param callback  {function} to call once the request succeeds or fails.
+ * @param {int} id            - the ID of the question to get.
+ * @param {callback} callback - to call once the request succeeds or fails.
  */
 RESTQuestion.prototype.getQuestion = function(id, callback) {
     $.ajax("api/quiz/" + this.quizId + "/question/" + id, {
@@ -46,11 +54,11 @@ RESTQuestion.prototype.getQuestion = function(id, callback) {
 
 /**
  * Create a question.
- * @param question    {object} of key value pairs, with new values to update the
- *                    resource on the server.
- * @param callback    {function} to call once the request succeeds or fails.
+ * @param {Question} question   - Question object to create the resource on the server.
+ * @param {callback} callback   - to call once the request succeeds or fails.
  */
 RESTQuestion.prototype.createQuestion = function(question, callback) {
+    question = JSON.stringify(question);
     $.ajax("api/quiz/" + this.quizId, {
         type: "POST",
         contentType: "application/json",
@@ -66,12 +74,12 @@ RESTQuestion.prototype.createQuestion = function(question, callback) {
 
 /**
  * Update a question.
- * @param id        {int} the ID of the question to update.
- * @param question  {object} of key value pairs, with new values to update the
- *                  resource on the server.
- * @param callback  {function} to call once the request succeeds or fails.
+ * @param {int} id              - the ID of the question to update.
+ * @param {Question} question   - Question object to update the resource on the server.
+ * @param {callback} callback   - to call once the request succeeds or fails.
  */
 RESTQuestion.prototype.updateQuestion = function(id, question, callback) {
+    question = JSON.stringify(question);
     $.ajax("api/quiz/" + this.quizId + "/question/" + id, {
         type: "PUT",
         contentType: "application/json",
@@ -87,8 +95,8 @@ RESTQuestion.prototype.updateQuestion = function(id, question, callback) {
 
 /**
  * Delete a question.
- * @param id        {int} the ID of the question to delete.
- * @param callback  {function} to call once the request succeeds or fails.
+ * @param {int} id              - the ID of the question to delete.
+ * @param {callback} callback   - to call once the request succeeds or fails.
  */
 RESTQuestion.prototype.deleteQuestion = function(id, callback) {
     $.ajax("api/quiz/" + this.quizId + "/question/" + id, {

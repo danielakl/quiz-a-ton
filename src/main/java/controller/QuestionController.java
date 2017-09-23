@@ -21,6 +21,7 @@ import java.util.Map;
 public class QuestionController {
     private static final QuizController quizController = new QuizController();
     private static final QuestionDAO questionDAO = new QuestionDAO(); // TODO: Implement a database solution.
+    private static int lastId = 0;
     private static final Map<Integer, Question> questions = new HashMap<>();
 
     /**
@@ -49,18 +50,7 @@ public class QuestionController {
             throw new NotFoundException("Could not find a quiz with the given ID of " + quizId + ".");
         }
 
-        /*
-         * Creates a list of all the questions in a quiz, based on the question ID
-         * list in the quiz object.
-         */
-        List<Question> list = new ArrayList<>();
-        for (Integer questionId : quiz.getQuestions()) {
-            Question question = getQuestion(questionId);
-            if (question != null) {
-                list.add(question);
-            }
-        }
-        return list;
+        return quiz.getQuestions();
     }
 
     /**
@@ -90,6 +80,8 @@ public class QuestionController {
             throw new NullPointerException("Question object can not be null.");
         }
 
+        question.setId(++lastId);
+
         // TODO: Update database with new question.
         questions.putIfAbsent(question.getId(), question);
     }
@@ -107,6 +99,8 @@ public class QuestionController {
             throw new NullPointerException("Question object can not be null.");
         }
 
+        question.setId(++lastId);
+
         // Check that quiz with given ID exists.
         Quiz quiz = quizController.getQuiz(id);
         if (quiz == null) {
@@ -115,14 +109,12 @@ public class QuestionController {
 
         // TODO: Update database with new question.
 
-        // Add question ID to quiz.
-        List<Integer> tempQuestions = quiz.getQuestions();
-        int questionId = question.getId();
-        tempQuestions.add(questionId);
+        // Add question to quiz.
+        quiz.getQuestions().add(question);
 
         // Update memory and database with new information.
         quizController.updateQuiz(quiz.getId(), quiz);
-        questions.putIfAbsent(questionId, question);
+        questions.putIfAbsent(question.getId(), question);
     }
 
     /**
