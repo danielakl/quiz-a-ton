@@ -1,14 +1,12 @@
-const questionBox = $("#questionBox");
-
 function updateAccordion() {
     $('.ui.accordion').accordion();
 }
-updateAccordion();
 
+// Add question
 var questionAmount = 0;
-$("#addQuizButton").on("click", function () {
+$("#addQuestionButton").on("click", function () {
     questionAmount++;
-    questionBox.append('<div class="question ui styled accordion">\n' +
+    $("#questionBox").append('<div class="question ui styled accordion">\n' +
         '                        <div class="ui title">\n' +
         '                            <i class="dropdown icon"></i>\n' +
         '                            Question ' + questionAmount + '\n' +
@@ -37,9 +35,10 @@ $("#addQuizButton").on("click", function () {
         '                            </div>\n' +
         '                            <!-- Question Duration Field -->\n' +
         '                            <div class="field">\n' +
-        '                                <div class="ui left icon input">\n' +
+        '                                <div class="ui left icon right labeled input">\n' +
         '                                    <i class="icon hourglass end"></i>\n' +
-        '                                    <input class="fieldDuration" type="number" min="10" max="60" placeholder="Duration (seconds)">\n' +
+        '                                    <input class="fieldDuration" type="number" min="10" max="60" placeholder="Duration">\n' +
+        '                                    <div class="ui label">seconds</div>\n' +
         '                                </div>\n' +
         '                            </div>\n' +
         '                            <!-- Answer Accordion -->\n' +
@@ -101,6 +100,7 @@ $("form").submit(function(e) {
     e.preventDefault();
 });
 
+// Submit quiz.
 $("#submit").on("click", function () {
     const title = $(".fieldTitle").val();
     const creator = $(".fieldCreator").val();
@@ -110,7 +110,7 @@ $("#submit").on("click", function () {
     // Add questions to quiz.
     var questions = [];
     $.each(jqQuestions, function (questionIndex, element) {
-        //Create answers.
+        // Create answers.
         var answers = [];
         $.each($(".fieldAnswer" + (questionIndex + 1)), function (answerIndex, answer) {
             answers.push($(answer).val());

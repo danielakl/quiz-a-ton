@@ -11,7 +11,7 @@ import java.util.*;
 
 /**
  * @author Daniel Klock
- * @version 1.2.0
+ * @version 1.3.1
  *
  * Controller class for quizzes, manages the logic related to quizzes for CRUD
  * operations. Manages temporal storage, and updating and retrieving data from
@@ -27,7 +27,7 @@ public class QuizController {
      *
      * @return A {@code List} of all quizzes.
      */
-    public List<Quiz> getQuizzes() {
+    public static List<Quiz> getQuizzes() {
         // TODO: Check database for new or newly modified quizzes.
 
         List<Quiz> list = new ArrayList<>();
@@ -42,7 +42,7 @@ public class QuizController {
      * @throws NotFoundException - If a quiz with the given ID was not found.
      * @return A {@code Quiz}.
      */
-    public Quiz getQuiz(int id) {
+    public static Quiz getQuiz(int id) {
         // TODO: Check database for new or newly modified quizzes.
 
         Quiz quiz = quizzes.get(id);
@@ -57,12 +57,16 @@ public class QuizController {
      *
      * @param quiz - The java bean to base the new quiz on.
      */
-    public void createQuiz(Quiz quiz) {
+    public static void createQuiz(Quiz quiz) {
         if (quiz == null) {
             throw new NullPointerException("Quiz object can not be null.");
         }
 
         quiz.setId(++lastId);
+        List<Question> questions = quiz.getQuestions();
+        for (Question question : questions) {
+            QuestionController.createQuestion(question);
+        }
 
         // TODO: Create quiz in database.
         quizzes.putIfAbsent(quiz.getId(), quiz);
@@ -70,11 +74,10 @@ public class QuizController {
 
     /**
      * Update a quiz with new data.
-     *
      * @param id    - The id of the quiz to update.
      * @param quiz  - Quiz bean to store the new data.
      */
-    public void updateQuiz(int id, Quiz quiz) {
+    public static void updateQuiz(int id, Quiz quiz) {
         if (quiz == null) {
             throw new NullPointerException("Quiz object can not be null.");
         }
@@ -104,11 +107,20 @@ public class QuizController {
 
     /**
      * Delete a quiz given a ID.
-     *
      * @param id - The ID of the quiz to delete.
      */
-    public void deleteQuiz(int id) {
-        // TODO: Remove quiz from database.
-        quizzes.remove(id);
+    public static void deleteQuiz(int id) {
+        Quiz quiz = quizzes.get(id);
+        if (quiz != null) {
+            List<Question> questions = quiz.getQuestions();
+            if (questions != null) {
+                for (Question question : questions) {
+                    QuestionController.deleteQuestion(question.getId());
+                }
+            }
+
+            // TODO: Remove quiz from database.
+            quizzes.remove(id);
+        }
     }
 }

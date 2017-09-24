@@ -9,12 +9,12 @@ import java.util.List;
 
 /**
  * @author Daniel Klock
- * @version 1.2.1
+ * @version 2.2.1
  *
  * REST service class that defines operations available for the Quiz resource.
  * This class defines those operations based on the CRUD standard.
  */
-@Path("/quiz/")
+@Path("/quizzes/")
 public class QuizService {
     private static final QuizController quizController = new QuizController();
 

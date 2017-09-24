@@ -8,13 +8,23 @@
 
     <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png"/>
 
-    <link rel="stylesheet" href="stylesheets/semantic.min.css">
+    <!-- External stylesheets -->
+    <link rel="stylesheet" href="stylesheets/lib/semantic.min.css">
 
+    <!-- Page specific stylesheets -->
+    <link rel="stylesheet" href="stylesheets/show.css">
+
+    <!-- External libraries -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous">
     </script>
-    <script defer src="javascripts/util/RESTQuiz.js"></script>
+
+    <!-- Internal libraries -->
+    <script src="javascripts/util/RESTQuiz.js"></script>
+    <script src="javascripts/util/Countdown.js"></script>
+
+    <!-- Page specific scripts -->
     <script defer src="javascripts/show.js"></script>
 </head>
 <body>
@@ -27,9 +37,10 @@
             <p>Pick a quiz or make one and invite your friends.</p>
         </header>
 
-        <div id="quizBox" class="ui raised loading segment">
-            <div id="quizList" class="ui big middle aligned selection list"></div>
-        </div>
+        <!-- Quiz table -->
+        <table class="ui loading selectable table">
+            <tbody id="quizTable"></tbody>
+        </table>
     </div>
 </body>
 </html>

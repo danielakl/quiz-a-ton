@@ -22,7 +22,7 @@ function RESTQuestion(quizId) {
  * @param {callback} callback - to call once the request succeeds or fails.
  */
 RESTQuestion.prototype.getQuestions = function(callback) {
-    $.ajax("api/quiz/" + this.quizId + "/question/", {
+    $.ajax("api/quizzes/" + this.quizId + "/questions/", {
         type: "GET",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -40,7 +40,7 @@ RESTQuestion.prototype.getQuestions = function(callback) {
  * @param {callback} callback - to call once the request succeeds or fails.
  */
 RESTQuestion.prototype.getQuestion = function(id, callback) {
-    $.ajax("api/quiz/" + this.quizId + "/question/" + id, {
+    $.ajax("api/quizzes/" + this.quizId + "/questions/" + id, {
         type: "GET",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -59,7 +59,7 @@ RESTQuestion.prototype.getQuestion = function(id, callback) {
  */
 RESTQuestion.prototype.createQuestion = function(question, callback) {
     question = JSON.stringify(question);
-    $.ajax("api/quiz/" + this.quizId, {
+    $.ajax("api/quizzes/" + this.quizId, {
         type: "POST",
         contentType: "application/json",
         data: question,
@@ -80,7 +80,7 @@ RESTQuestion.prototype.createQuestion = function(question, callback) {
  */
 RESTQuestion.prototype.updateQuestion = function(id, question, callback) {
     question = JSON.stringify(question);
-    $.ajax("api/quiz/" + this.quizId + "/question/" + id, {
+    $.ajax("api/quizzes/" + this.quizId + "/questions/" + id, {
         type: "PUT",
         contentType: "application/json",
         data: question,
@@ -99,7 +99,7 @@ RESTQuestion.prototype.updateQuestion = function(id, question, callback) {
  * @param {callback} callback   - to call once the request succeeds or fails.
  */
 RESTQuestion.prototype.deleteQuestion = function(id, callback) {
-    $.ajax("api/quiz/" + this.quizId + "/question/" + id, {
+    $.ajax("api/quizzes/" + this.quizId + "/questions/" + id, {
         type: "DELETE",
         success: function (data, textStatus, jqXHR) {
             callback(data, null, textStatus, jqXHR);

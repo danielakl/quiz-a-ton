@@ -19,7 +19,7 @@ function RESTQuiz() { }
  * @param {callback} callback - to call once the request succeeds or fails.
  */
 RESTQuiz.getQuizzes = function(callback) {
-    $.ajax("api/quiz/", {
+    $.ajax("api/quizzes/", {
         type: "GET",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -37,7 +37,7 @@ RESTQuiz.getQuizzes = function(callback) {
  * @param {callback} callback   - to call once the request succeeds or fails.
  */
 RESTQuiz.getQuiz = function(id, callback) {
-    $.ajax("api/quiz/" + id, {
+    $.ajax("api/quizzes/" + id, {
         type: "GET",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -56,7 +56,7 @@ RESTQuiz.getQuiz = function(id, callback) {
  */
 RESTQuiz.createQuiz = function(quiz, callback) {
     quiz = JSON.stringify(quiz);
-    $.ajax("api/quiz/", {
+    $.ajax("api/quizzes/", {
         type: "POST",
         contentType: "application/json; charset=UTF-8",
         dataType: "json",
@@ -78,7 +78,7 @@ RESTQuiz.createQuiz = function(quiz, callback) {
  */
 RESTQuiz.updateQuiz = function(id, quiz, callback) {
     quiz = JSON.stringify(quiz);
-    $.ajax("api/quiz/" + id, {
+    $.ajax("api/quizzes/" + id, {
         type: "PUT",
         contentType: "application/json",
         data: quiz,
@@ -97,7 +97,7 @@ RESTQuiz.updateQuiz = function(id, quiz, callback) {
  * @param {callback} callback   - to call once the request succeeds or fails.
  */
 RESTQuiz.deleteQuiz = function(id, callback) {
-    $.ajax("api/quiz/" + id, {
+    $.ajax("api/quizzes/" + id, {
         type: "DELETE",
         success: function (data, textStatus, jqXHR) {
             callback(data, null, textStatus, jqXHR);

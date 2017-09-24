@@ -12,14 +12,13 @@ import java.util.Map;
 
 /**
  * @author Daniel Klock
- * @version 1.1.0
+ * @version 1.2.1
  *
  * Controller class for questions, manages the logic related to questions for
  * CRUD operations. Manages temporal storage, and updating and retrieving
  * data from database through a DAO for questions.
  */
 public class QuestionController {
-    private static final QuizController quizController = new QuizController();
     private static final QuestionDAO questionDAO = new QuestionDAO(); // TODO: Implement a database solution.
     private static int lastId = 0;
     private static final Map<Integer, Question> questions = new HashMap<>();
@@ -29,7 +28,7 @@ public class QuestionController {
      *
      * @return A {@code List} of all questions.
      */
-    public List<Question> getQuestions() {
+    public static List<Question> getQuestions() {
         // TODO: Check database for new or newly modified questions.
 
         List<Question> list = new ArrayList<>();
@@ -44,8 +43,8 @@ public class QuestionController {
      * @throws NotFoundException - If the quiz with the given ID is not found.
      * @return A {@code List} of questions.
      */
-    public List<Question> getQuestions(int quizId) {
-        Quiz quiz = quizController.getQuiz(quizId);
+    public static List<Question> getQuestions(int quizId) {
+        Quiz quiz = QuizController.getQuiz(quizId);
         if (quiz == null) {
             throw new NotFoundException("Could not find a quiz with the given ID of " + quizId + ".");
         }
@@ -60,7 +59,7 @@ public class QuestionController {
      * @return A {@code Question}.
      * @throws NotFoundException - If a question with the given ID is not found.
      */
-    public Question getQuestion(int id) {
+    public static Question getQuestion(int id) {
         // TODO: Check database for new or newly modified quizzes.
 
         Question question = questions.get(id);
@@ -75,7 +74,7 @@ public class QuestionController {
      *
      * @param question - The question to create.
      */
-    public void createQuestion(Question question) {
+    public static void createQuestion(Question question) {
         if (question == null) {
             throw new NullPointerException("Question object can not be null.");
         }
@@ -94,7 +93,7 @@ public class QuestionController {
      * @throws NullPointerException - If the {@code Question} object is {@code null}.
      * @throws NotFoundException    - If a quiz with the given ID is not found.
      */
-    public void createQuestion(int id, Question question) {
+    public static void createQuestion(int id, Question question) {
         if (question == null) {
             throw new NullPointerException("Question object can not be null.");
         }
@@ -102,7 +101,7 @@ public class QuestionController {
         question.setId(++lastId);
 
         // Check that quiz with given ID exists.
-        Quiz quiz = quizController.getQuiz(id);
+        Quiz quiz = QuizController.getQuiz(id);
         if (quiz == null) {
             throw new NotFoundException("Can not find a quiz with id of " + id + ".");
         }
@@ -113,7 +112,7 @@ public class QuestionController {
         quiz.getQuestions().add(question);
 
         // Update memory and database with new information.
-        quizController.updateQuiz(quiz.getId(), quiz);
+        QuizController.updateQuiz(quiz.getId(), quiz);
         questions.putIfAbsent(question.getId(), question);
     }
 
@@ -125,7 +124,7 @@ public class QuestionController {
      * @throws NullPointerException - If the {@code Question} object is {@code null}.
      * @throws NotFoundException    - If a question with the given ID is not found.
      */
-    public void updateQuestion(int id, Question question) {
+    public static void updateQuestion(int id, Question question) {
         if (question == null) {
             throw new NullPointerException("Question object can not be null.");
         }
@@ -160,7 +159,7 @@ public class QuestionController {
      *
      * @param id - The ID of the question to delete.
      */
-    public void deleteQuestion(int id) {
+    public static void deleteQuestion(int id) {
         // TODO: Remove question from database.
         questions.remove(id);
     }
@@ -170,9 +169,9 @@ public class QuestionController {
      * @param quizId        - The ID of the quiz to delete a question for.
      * @param questionId    - The ID of the question to delete.
      */
-    public void deleteQuestion(int quizId, int questionId) {
+    public static void deleteQuestion(int quizId, int questionId) {
         // Check that quiz with given ID exists.
-        Quiz quiz = quizController.getQuiz(quizId);
+        Quiz quiz = QuizController.getQuiz(quizId);
         if (quiz == null) {
             throw new NotFoundException("Can not find a quiz with id of " + quizId + ".");
         }
