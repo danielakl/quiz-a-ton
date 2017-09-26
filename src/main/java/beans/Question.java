@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author Daniel Klock
- * @version 1.1.2
+ * @version 1.2.2
  *
  * Question bean class following official JavaBean specification found at:
  * "http://www.oracle.com/technetwork/articles/javaee/spec-136004.html".
@@ -96,5 +96,19 @@ public class Question implements Serializable {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Question)) {
+            return false;
+        }
+
+        Question question = (Question) obj;
+        return question.getId() == id;
     }
 }

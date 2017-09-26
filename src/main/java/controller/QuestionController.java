@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * @author Daniel Klock
- * @version 1.2.1
+ * @version 2.2.2
  *
  * Controller class for questions, manages the logic related to questions for
  * CRUD operations. Manages temporal storage, and updating and retrieving
@@ -38,7 +38,6 @@ public class QuestionController {
 
     /**
      * Get all questions within a quiz.
-     *
      * @param quizId - The ID of the quiz to get questions from.
      * @throws NotFoundException - If the quiz with the given ID is not found.
      * @return A {@code List} of questions.
@@ -54,7 +53,6 @@ public class QuestionController {
 
     /**
      * Get a question given an ID.
-     *
      * @param id - The ID of the question.
      * @return A {@code Question}.
      * @throws NotFoundException - If a question with the given ID is not found.
@@ -71,7 +69,6 @@ public class QuestionController {
 
     /**
      * Create a new question.
-     *
      * @param question - The question to create.
      */
     public static void createQuestion(Question question) {
@@ -87,7 +84,6 @@ public class QuestionController {
 
     /**
      * Create a new question linked to an existing quiz.
-     *
      * @param id        - The ID of the quiz to find.
      * @param question  - The question to add to the quiz.
      * @throws NullPointerException - If the {@code Question} object is {@code null}.
@@ -112,19 +108,18 @@ public class QuestionController {
         quiz.getQuestions().add(question);
 
         // Update memory and database with new information.
-        QuizController.updateQuiz(quiz.getId(), quiz);
         questions.putIfAbsent(question.getId(), question);
     }
 
     /**
      * Update a question.
-     *
      * @param id        - The ID of the question to update.
      * @param question  - Question bean to store the new data.
+     * @param noRemove  - Use noRemove to avoid removing data from the question object.
      * @throws NullPointerException - If the {@code Question} object is {@code null}.
      * @throws NotFoundException    - If a question with the given ID is not found.
      */
-    public static void updateQuestion(int id, Question question) {
+    public static void updateQuestion(int id, Question question, boolean noRemove) {
         if (question == null) {
             throw new NullPointerException("Question object can not be null.");
         }
@@ -142,13 +137,31 @@ public class QuestionController {
         int correctAnswerIndex = question.getCorrectAnswerIndex();
         int duration = question.getDuration();
 
-        // Update with new information if available.
-        found.setQuestion((newQuestion != null) ? newQuestion : found.getQuestion());
-        found.setImageURL((imageURL != null) ? imageURL : found.getImageURL());
-        found.setAnswers((answers != null) ? answers : found.getAnswers());
-        found.setPoints((points > -1) ? points : found.getPoints());
-        found.setCorrectAnswerIndex((correctAnswerIndex > -1) ? correctAnswerIndex : found.getCorrectAnswerIndex());
-        found.setDuration((duration > 10) ? duration : found.getDuration());
+        // No remove mode, means to not remove any data only add.
+        if (noRemove) {
+            // Update with new information if available.
+            found.setQuestion((newQuestion != null) ? newQuestion : found.getQuestion());
+            found.setImageURL((imageURL != null) ? imageURL : found.getImageURL());
+
+            List<String> foundAnswers = found.getAnswers();
+            if (answers != null && foundAnswers != null) {
+                // Add new answers.
+                for (String answer : answers) {
+                    if (!foundAnswers.contains(answer)) {
+                        foundAnswers.add(answer);
+                    }
+                }
+            } else if (answers != null) {
+                found.setAnswers(answers);
+            }
+
+            found.setPoints((points > -1) ? points : found.getPoints());
+            found.setCorrectAnswerIndex((correctAnswerIndex > -1) ? correctAnswerIndex : found.getCorrectAnswerIndex());
+            found.setDuration((duration > 10) ? duration : found.getDuration());
+        } else {
+            found = question;
+            found.setId(id);
+        }
 
         // TODO: Update database with altered object.
         questions.put(id, found);
@@ -156,7 +169,6 @@ public class QuestionController {
 
     /**
      * Delete a question given a ID.
-     *
      * @param id - The ID of the question to delete.
      */
     public static void deleteQuestion(int id) {

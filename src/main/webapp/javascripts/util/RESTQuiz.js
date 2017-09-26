@@ -51,16 +51,14 @@ RESTQuiz.getQuiz = function(id, callback) {
 
 /**
  * Create a quiz.
- * @param {Quiz} quiz           - Quiz object used to create the resource on the server.
+ * @param {Object} quiz         - Quiz object used to create the resource on the server.
  * @param {callback} callback   - to call once the request succeeds or fails.
  */
 RESTQuiz.createQuiz = function(quiz, callback) {
-    quiz = JSON.stringify(quiz);
     $.ajax("api/quizzes/", {
         type: "POST",
         contentType: "application/json; charset=UTF-8",
-        dataType: "json",
-        data: quiz,
+        data: JSON.stringify(quiz),
         success: function (data, textStatus, jqXHR) {
             callback(data, null, textStatus, jqXHR);
         },
@@ -73,15 +71,34 @@ RESTQuiz.createQuiz = function(quiz, callback) {
 /**
  * Update a quiz.
  * @param {int} id              - the ID of the quiz to update.
- * @param {Quiz} quiz           - Quiz object to update the resource on the server.
+ * @param {Object} quiz         - Quiz object to update the resource on the server.
  * @param {callback} callback   - to call once the request succeeds or fails.
  */
 RESTQuiz.updateQuiz = function(id, quiz, callback) {
-    quiz = JSON.stringify(quiz);
     $.ajax("api/quizzes/" + id, {
         type: "PUT",
-        contentType: "application/json",
-        data: quiz,
+        contentType: "application/json; charset=UTF-8",
+        data: JSON.stringify(quiz),
+        success: function (data, textStatus, jqXHR) {
+            callback(data, null, textStatus, jqXHR);
+        },
+        error: function (jqXHR, textStatus, error) {
+            callback(null, error, textStatus, jqXHR);
+        }
+    });
+};
+
+/**
+ * Partialy update a quiz.
+ * @param {int} id              - The ID of the quiz to update.
+ * @param {object} quiz         - Object with updated values, not all values are required.
+ * @param {callback} callback   - Callback function to run on success or error.
+ */
+RESTQuiz.partiallyUpdateQuiz = function(id, quiz, callback) {
+    $.ajax("api/quizzes/" + id, {
+        type: "PATCH",
+        contentType: "application/json; charset=UTF-8",
+        data: JSON.stringify(quiz),
         success: function (data, textStatus, jqXHR) {
             callback(data, null, textStatus, jqXHR);
         },

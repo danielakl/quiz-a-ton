@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * @author Daniel Klock
- * @version 0.1.0
+ * @version 0.2.0
  *
  * Player bean class following official JavaBean specification found at:
  * "http://www.oracle.com/technetwork/articles/javaee/spec-136004.html".
@@ -40,5 +40,19 @@ public class Player implements Serializable {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Player)) {
+            return false;
+        }
+
+        Player player = (Player) obj;
+        return player.getNickname() != null && player.getNickname().equals(nickname);
     }
 }

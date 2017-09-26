@@ -54,15 +54,14 @@ RESTQuestion.prototype.getQuestion = function(id, callback) {
 
 /**
  * Create a question.
- * @param {Question} question   - Question object to create the resource on the server.
+ * @param {Object} question     - Question object to create the resource on the server.
  * @param {callback} callback   - to call once the request succeeds or fails.
  */
 RESTQuestion.prototype.createQuestion = function(question, callback) {
-    question = JSON.stringify(question);
     $.ajax("api/quizzes/" + this.quizId, {
         type: "POST",
-        contentType: "application/json",
-        data: question,
+        contentType: "application/json; charset=UTF-8",
+        data: JSON.stringify(question),
         success: function (data, textStatus, jqXHR) {
             callback(data, null, textStatus, jqXHR);
         },
@@ -75,15 +74,34 @@ RESTQuestion.prototype.createQuestion = function(question, callback) {
 /**
  * Update a question.
  * @param {int} id              - the ID of the question to update.
- * @param {Question} question   - Question object to update the resource on the server.
+ * @param {Object} question     - Question object to update the resource on the server.
  * @param {callback} callback   - to call once the request succeeds or fails.
  */
 RESTQuestion.prototype.updateQuestion = function(id, question, callback) {
-    question = JSON.stringify(question);
     $.ajax("api/quizzes/" + this.quizId + "/questions/" + id, {
         type: "PUT",
-        contentType: "application/json",
-        data: question,
+        contentType: "application/json; charset=UTF-8",
+        data: JSON.stringify(question),
+        success: function (data, textStatus, jqXHR) {
+            callback(data, null, textStatus, jqXHR);
+        },
+        error: function (jqXHR, textStatus, error) {
+            callback(null, error, textStatus, jqXHR);
+        }
+    });
+};
+
+/**
+ * Partially update a question.
+ * @param {int} id              - The ID of the question to update.
+ * @param {Object} question     - Question object with updated values, all values are not required.
+ * @param {callback} callback   - to run on success or error.
+ */
+RESTQuestion.prototype.partiallyUpdateQuiz = function(id, question, callback) {
+    $.ajax("api/quizzes/" + this.quizId + "/questions/" + id, {
+        type: "PATCH",
+        contentType: "application/json; charset=UTF-8",
+        data: JSON.stringify(question),
         success: function (data, textStatus, jqXHR) {
             callback(data, null, textStatus, jqXHR);
         },

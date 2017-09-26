@@ -10,6 +10,10 @@ tr {
     cursor: pointer;
 }
 
+td {
+    text-transform: capitalize;
+}
+
 #quizBox {
     min-height: 200px;
 }

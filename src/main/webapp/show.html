@@ -19,6 +19,7 @@
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous">
     </script>
+    <script src="javascripts/lib/semantic.min.js"></script>
 
     <!-- Internal libraries -->
     <script src="javascripts/util/RESTQuiz.js"></script>
@@ -28,11 +29,20 @@
     <script defer src="javascripts/show.js"></script>
 </head>
 <body>
+    <div class="ui modal">
+        <div class="header">Scoreboard</div>
+        <div class="scrolling content">
+            <table class="ui loading selectable table">
+                <tbody id="scoreboard"></tbody>
+            </table>
+        </div>
+    </div>
+
     <div class="ui container">
         <header class="ui message">
-            <a href="/quiz/new.html"><button class="ui blue circular right floated huge icon button">
+            <a class="ui blue circular right floated huge icon button" href="/quiz/new.html">
                 <i class="plus icon"></i>
-            </button></a>
+            </a>
             <h1 class="ui header">Quiz-A-Ton</h1>
             <p>Pick a quiz or make one and invite your friends.</p>
         </header>

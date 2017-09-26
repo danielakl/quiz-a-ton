@@ -46,13 +46,41 @@ function reloadQuizTable() {
                         '                 <td><i class="user circle outline icon"></i>' + quiz.playerList.length + '/10</td>\n' +
                         '                 <td><i class="hourglass end icon"></i>' + timeLeftString + '</td>\n' +
                         '                 <td><i class="help icon"></i>' + quiz.questions.length + '/10</td>\n' +
+                        '                 <td class="center aligned collapsing">\n' +
+                        '                     <button value="' + quiz.id + '" class="ui circular button joinButton">Join</button>\n' +
+                        '                     <button value="' + quiz.id + '" class="ui circular button scoreboardButton">Scoreboard</button>\n' +
+                        '                 </td>\n' +
                         '             </tr>');
-                    $("tr").last().on("click", function () {
-                        window.location.href = "http://localhost:8080/quiz/quiz.html#" + quiz.id;
-                    });
                 }
             });
             $("table").removeClass("loading");
+
+            $(".joinButton").on("click", function () {
+                window.location.href = "http://localhost:8080/quiz/quiz.html?qid=" + this.value;
+            });
+            $(".scoreboardButton").on("click", function () {
+                // Get correct quiz.
+                const quiz = data.find(function (element, index, array) {
+                    if (element.id === this.value) {
+                        return true;
+                    }
+                }, this);
+
+                // Build scoreboard for quiz.
+                const scoreboard = $("#scoreboard");
+                scoreboard.empty();
+                $.each(quiz.playerList, function (index, player) {
+                    scoreboard.append(
+                        '<tr>\n' +
+                        '    <td>' + player.nickname + '</td>\n' +
+                        '    <td>' + player.points + '</td>\n' +
+                        '</tr>'
+                    );
+                });
+
+                // Display scoreboard.
+                $('.ui.modal').modal('show');
+            });
         }
     });
 }

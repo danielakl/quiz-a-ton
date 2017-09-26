@@ -28,7 +28,7 @@ Message.showMessage = function (selector, type, title, message) {
 
     // Add text/html content.
     const header = $(selector + " > .header");
-    header.append(title);
+    header.html(title);
     if (message) {
         header.after(message);
     }

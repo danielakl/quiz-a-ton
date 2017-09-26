@@ -11,6 +11,9 @@
     <!-- External stylesheets -->
     <link rel="stylesheet" href="stylesheets/lib/semantic.min.css">
 
+    <!-- Page specific stylesheets -->
+    <link rel="stylesheet" href="stylesheets/quiz.css">
+
     <!-- External libraries -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -18,14 +21,34 @@
     </script>
 
     <!-- Internal libraries -->
+    <script src="javascripts/util/RESTQuiz.js"></script>
     <script src="javascripts/util/RESTQuestion.js"></script>
+    <script src="javascripts/util/Countdown.js"></script>
+    <script src="javascripts/util/URL.js"></script>
 
     <!-- Page specific scripts -->
     <script defer src="javascripts/quiz.js"></script>
 </head>
 <body>
-    <div class="ui container">
-        <div id="question" class="ui centered card">
+    <div class="ui raised container">
+        <div class="ui right floated circular segment">
+            <h1 id="timer" class="ui header">&#x221e;</h1>
+        </div>
+        <img id="image" class="ui compact centered rounded image" src="assets/images/questionDefault.png">
+        <div class="ui segments">
+            <div class="ui segment">
+                <div id="question" class="ui large header"></div>
+            </div>
+            <div class="ui secondary segment">
+                <div class="ui two buttons">
+                    <button class="answer ui button">Option 1</button>
+                    <button class="answer ui button">Option 2</button>
+                </div>
+                <div class="ui two buttons">
+                    <button class="answer ui disabled button">Option 3</button>
+                    <button class="answer ui disabled button">Option 4</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>

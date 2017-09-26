@@ -117,20 +117,26 @@ $("#submit").on("click", function () {
         });
 
         // Create Question.
-        const question = new Question(
-            $($(".fieldQuestion")[questionIndex]).val(),
-            $($(".fieldImage")[questionIndex]).val(),
-            answers,
-            parseInt($($(".fieldPoints")[questionIndex]).val()),
-            0,
-            parseInt($($(".fieldDuration")[questionIndex]).val())
-        );
+        const question = {
+            question: $($(".fieldQuestion")[questionIndex]).val(),
+            imageURL: $($(".fieldImage")[questionIndex]).val(),
+            answers: answers,
+            points: parseInt($($(".fieldPoints")[questionIndex]).val()),
+            correctAnswerIndex: 0,
+            duration: parseInt($($(".fieldDuration")[questionIndex]).val())
+        };
         questions.push(question);
     });
 
     // Create quiz.
-    const quiz = new Quiz(title, creator, startTime, questions, []);
-    RESTQuiz.createQuiz(quiz, function (data, error, textStatus, jqXHR) {
+    RESTQuiz.createQuiz(
+        {
+            name: title,
+            creator: creator,
+            startTime: startTime,
+            questions: questions,
+            playerList: []
+        }, function (data, error, textStatus, jqXHR) {
         if (error) {
             Message.showMessage(".ui.message", "error", "Error creating a new quiz.", error);
         } else {

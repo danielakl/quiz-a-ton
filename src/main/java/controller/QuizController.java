@@ -6,12 +6,11 @@ import beans.Quiz;
 import dao.QuizDAO;
 
 import javax.ws.rs.NotFoundException;
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
  * @author Daniel Klock
- * @version 1.3.1
+ * @version 2.3.3
  *
  * Controller class for quizzes, manages the logic related to quizzes for CRUD
  * operations. Manages temporal storage, and updating and retrieving data from
@@ -24,7 +23,6 @@ public class QuizController {
 
     /**
      * Get all quizzes.
-     *
      * @return A {@code List} of all quizzes.
      */
     public static List<Quiz> getQuizzes() {
@@ -37,7 +35,6 @@ public class QuizController {
 
     /**
      * Get a quiz given an ID.
-     *
      * @param id - The ID of the quiz.
      * @throws NotFoundException - If a quiz with the given ID was not found.
      * @return A {@code Quiz}.
@@ -54,8 +51,8 @@ public class QuizController {
 
     /**
      * Create a new quiz given a quiz java bean.
-     *
      * @param quiz - The java bean to base the new quiz on.
+     * @throws NullPointerException - If the {@code Quiz} object is null.
      */
     public static void createQuiz(Quiz quiz) {
         if (quiz == null) {
@@ -74,10 +71,13 @@ public class QuizController {
 
     /**
      * Update a quiz with new data.
-     * @param id    - The id of the quiz to update.
-     * @param quiz  - Quiz bean to store the new data.
+     * @param id        - The id of the quiz to update.
+     * @param quiz      - Quiz bean to store the new data.
+     * @param noRemove  - Use noRemove to avoid removing data in the Quiz object.
+     * @throws NullPointerException - If {@code Quiz} is null.
+     * @throws NotFoundException - If a quiz with the given ID is not found.
      */
-    public static void updateQuiz(int id, Quiz quiz) {
+    public static void updateQuiz(int id, Quiz quiz, boolean noRemove) {
         if (quiz == null) {
             throw new NullPointerException("Quiz object can not be null.");
         }
@@ -94,12 +94,46 @@ public class QuizController {
         List<Question> questions = quiz.getQuestions();
         List<Player> playerList = quiz.getPlayerList();
 
-        // Update with new information if available.
-        found.setName((name != null) ? name : found.getName());
-        found.setCreator((creator != null) ? creator : found.getCreator());
-        found.setStartTime((startTime != null) ? startTime : found.getStartTime());
-        found.setQuestions((questions != null) ? questions : found.getQuestions());
-        found.setPlayerList((playerList != null) ? playerList : quiz.getPlayerList());
+        // No remove mode, means to not remove any data only add.
+        if (noRemove) {
+            // Update with new information if available.
+            found.setName((name != null) ? name : found.getName());
+            found.setCreator((creator != null) ? creator : found.getCreator());
+            found.setStartTime((startTime != null) ? startTime : found.getStartTime());
+
+            List<Question> foundQuestions = found.getQuestions();
+            if (questions != null && foundQuestions != null) {
+                // Add new questions and update existing ones.
+                for (Question question : questions) {
+                    if (!foundQuestions.contains(question)) {
+                        foundQuestions.add(question);
+                    } else {
+                        int index = foundQuestions.indexOf(question);
+                        foundQuestions.set(index, question);
+                    }
+                }
+            } else if (questions != null) {
+                found.setQuestions(questions);
+            }
+
+            List<Player> foundPlayerList = found.getPlayerList();
+            if (playerList != null && foundPlayerList != null) {
+                // Add new players and update existing ones.
+                for (Player player : playerList) {
+                    if (!foundPlayerList.contains(player)) {
+                        foundPlayerList.add(player);
+                    } else {
+                        int index = foundPlayerList.indexOf(player);
+                        foundPlayerList.set(index, player);
+                    }
+                }
+            } else if (playerList != null) {
+                found.setPlayerList(playerList);
+            }
+        } else {
+            found = quiz;
+            found.setId(id);
+        }
 
         // TODO: Update database with altered object.
         quizzes.put(id, found);
