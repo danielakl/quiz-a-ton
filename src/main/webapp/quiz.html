@@ -19,6 +19,7 @@
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous">
     </script>
+    <script src="javascripts/lib/semantic.min.js"></script>
 
     <!-- Internal libraries -->
     <script src="javascripts/util/RESTQuiz.js"></script>
@@ -30,6 +31,15 @@
     <script defer src="javascripts/quiz.js"></script>
 </head>
 <body>
+    <div class="ui modal">
+        <div class="header">Scoreboard</div>
+        <div class="scrolling content">
+            <table class="ui table">
+                <tbody id="scoreboard"></tbody>
+            </table>
+        </div>
+    </div>
+
     <div class="ui raised container">
         <div class="ui right floated circular segment">
             <h1 id="timer" class="ui header">&#x221e;</h1>

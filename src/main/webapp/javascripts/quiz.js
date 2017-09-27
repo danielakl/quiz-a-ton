@@ -1,52 +1,63 @@
 const quizId = parseInt(getUrlParameter("qid"));
 const player = { nickname: getUrlParameter("nick"), points: 0 };
+const timer = $("#timer");
 var timeout = false;
 var haveAnswered = false;
-var currentQuestion = {};
 
-const restQuestion = new RESTQuestion(quizId);
-restQuestion.getQuestions(function (questions, error, textStatus, jqXHR) {
+RESTQuiz.getQuiz(quizId, function (data, error, textStatus, jqXHR) {
     if (!error) {
-        console.dir(questions);
-        for (var i = 0; i < questions.length; i++) {
-            currentQuestion = questions[i];
-            insertQuestion();
-            startCountdown();
-            setTimeout(function () {
-                if (timeout) {
-                    submit(-1);
-                    reset();
-                }
-            }, currentQuestion.duration * 1000);
-        }
+        startQuestion(0, data.questions, 0);
     } else {
         console.log(error);
     }
 });
 
 /**
- * Insert data from a Question.
+ * Start question function handles resetting HTML page and inserting new questions.
+ * @param {int} iterator    - iterator to use with questions array.
+ * @param {Array} questions - array of questions to go through.
+ * @param {int} duration    - the time until next question.
  */
-function insertQuestion() {
-    if (currentQuestion) {
+function startQuestion(iterator, questions, duration) {
+    setTimeout(function () {
+        reset();
+        if (questions[iterator]) {
+            insertQuestion(questions[iterator]);
+            startCountdown(questions[iterator].duration);
+        }
+
+        if (questions[iterator + 1]) {
+            startQuestion(iterator + 1, questions, questions[iterator].duration * 1000);
+        } else {
+            setTimeout(showScoreboard, questions[iterator].duration * 1000);
+        }
+    }, duration);
+}
+
+/**
+ * Insert data from question onto the HTML site.
+ * @param {object} question - an object containing the data to insert.
+ */
+function insertQuestion(question) {
+    if (question) {
         const image         = $("#image"),
               questionDiv   = $("#question"),
               answer        = $(".answer");
 
-        if (currentQuestion.imageURL) {
-            image.attr("src", currentQuestion.imageURL);
+        if (question.imageURL) {
+            image.attr("src", question.imageURL);
         }
-        if (currentQuestion.question) {
-            questionDiv.text(currentQuestion.question);
+        if (question.question) {
+            questionDiv.text(question.question);
         }
 
-        if (currentQuestion.answers) {
+        if (question.answers) {
             answer.each(function (index) {
-                if (currentQuestion.answers[index]) {
+                if (question.answers[index]) {
                     $(this).removeClass("disabled");
-                    $(this).text(currentQuestion.answers[index]);
+                    $(this).text(question.answers[index]);
                     $(this).on("click", function () {
-                        submit(index);
+                        submit(index, question);
                     });
                 } else {
                     $(this).text("");
@@ -57,42 +68,75 @@ function insertQuestion() {
     }
 }
 
-function startCountdown() {
-    const timer = $("#timer");
+/**
+ * Starts a countdown to visualize how much time a user have to answer the question.
+ * @param {int} duration - the time to start the timer on.
+ */
+function startCountdown(duration) {
     const end = new Date();
-    end.setSeconds(end.getSeconds() + currentQuestion.duration);
+    end.setSeconds(end.getSeconds() + duration);
+    timer.text(("0" + duration).slice(-2));
     const intervalId = setInterval(function () {
         var timeLeft = Countdown.remainingTime(end);
         if (timeLeft.total <= 0) {
-            clearInterval(intervalId);
             timeout = true;
+            clearInterval(intervalId);
         } else {
-            timer.text(Math.floor(timeLeft.total / 1000));
+            timer.text(("0" + Math.floor(timeLeft.total / 1000)).slice(-2));
         }
     }, 500);
 }
 
-function submit(answerIndex) {
+/**
+ * Submit an answer, runs when user clicks an answer.
+ * @param {int} answerIndex - the index of the answer the user submitted.
+ * @param {object} question - question object to get data.
+ */
+function submit(answerIndex, question) {
     if (!haveAnswered) {
         haveAnswered = true;
         const answers = $(".answer");
-        if (answerIndex === currentQuestion.correctAnswerIndex) {
-            $(answers[answerIndex]).addClass("green");
-            player.points = player.points + currentQuestion.points;
+        if (answerIndex === question.correctAnswerIndex) {
+            $(answers[answerIndex]).addClass("positive");
+            player.points += question.points;
             RESTQuiz.partiallyUpdateQuiz(quizId, { playerList: [ player ] }, function (data, error, textStatus, jqXHR) {
                 if (error) {
-                    console.log(textStatus);
+                    console.log(error);
                 }
             });
         } else {
             if (answerIndex !== -1) {
                 $(answers[answerIndex]).addClass("negative");
-                $(answers[currentQuestion.correctAnswerIndex]).addClass("positive");
+                $(answers[question.correctAnswerIndex]).addClass("positive");
             }
         }
     }
 }
 
+/**
+ * Display scoreboard, at the end of the quiz.
+ */
+function showScoreboard() {
+    const scoreboard = $("#scoreboard");
+    RESTQuiz.getQuiz(quizId, function (data, error, textStatus, jqXHR) {
+        if (!error) {
+            $.each(data.playerList, function (index, element) {
+                scoreboard.append(
+                    '<tr>\n' +
+                    '    <td>' + element.nickname + '</td>\n' +
+                    '    <td>' + element.points + '</td>\n' +
+                    '</tr>');
+            });
+            $(".ui.modal").modal("show");
+        } else {
+            console.log(error);
+        }
+    });
+}
+
+/**
+ * Reset HTML.
+ */
 function reset() {
     const image         = $("#image"),
           questionDiv   = $("#question"),
@@ -102,7 +146,7 @@ function reset() {
     image.attr("src", "assets/images/questionDefault.png");
     questionDiv.text("Looks like somebody forgot to add a question.");
     timer.text("\u221e");
-    answer.each(function () {
+    $.each(answer, function (index, element) {
         $(this).addClass("disabled");
         $(this).removeClass("positive");
         $(this).removeClass("negative");

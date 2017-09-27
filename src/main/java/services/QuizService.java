@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @author Daniel Klock
- * @version 2.3.2
+ * @version 2.3.3
  *
  * REST service class that defines operations available for the Quiz resource.
  * This class defines those operations based on the CRUD standard.
@@ -58,7 +58,7 @@ public class QuizService {
     @PATCH
     @Path("/{quizId}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void partiallyUpdateQuestion(@PathParam("quizId") int id, Quiz quiz) {
+    public void partiallyUpdateQuiz(@PathParam("quizId") int id, Quiz quiz) {
         QuizController.updateQuiz(id, quiz, true);
     }
 

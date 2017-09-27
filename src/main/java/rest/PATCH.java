@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * PATCH HTTP method declaration. PATCH is used to partially update a resource.
+ * Found on: https://stackoverflow.com/questions/17897171/how-to-have-a-patch-annotation-for-jax-rs
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
