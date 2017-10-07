@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="resources/favicon.png"/>
+    <title>Quiz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+    <script src="javascripts/tools/Countdown.js"></script>
+    <script src="javascripts/tools/QuizREST.js"></script>
+    <script src="javascripts/index.js"></script>
+</head>
+<body>
+
+    <div class="ui raised container">
+        <!--Header div -->
+        <div id="headerDiv">
+            <img id="headerImg" src="resources/quizIt.png">
+            <p id="headerText">The only quiz site you'll ever need!</p>
+        </div>
+
+        <!--Refresh and add Quiz buttons-->
+        <hr>
+        <button id="refreshBtn" class="ui blue circular button"><i class="ui icon refresh"></i>Refresh</button>
+        <a href="create.html" target="_self">
+            <button class="ui blue circular button"><i class="ui icon add"></i>Create Quiz</button>
+        </a>
+
+        <!--Table with quizzes-->
+        <table id="table" class="ui celled table">
+            <thead>
+                <tr>
+                    <!--<th><div class="ui blue label">QuizName</div></th>-->
+                    <!--<th><div class="ui blue label">StartTime</div></th>-->
+                    <!--<th><div class="ui blue label">Author</div></th>-->
+                    <!--<th><div class="ui blue label">Actions</div></th>-->
+
+                    <th><h1 class="ui blue medium header">QuizName</h1></th>
+                    <th><h1 class="ui blue medium header">Starts in</h1></th>
+                    <th><h1 class="ui blue medium header">Author</h1></th>
+                    <th><h1 class="ui blue medium header">Actions</h1></th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+    <div id="nickModal" class="ui modal">
+        <div class="ui hidden message">
+            <div class="header">Nickname taken</div>
+        </div>
+        <div class="header">
+            <h1 class="ui blue header">Nickname</h1>
+        </div>
+        <div class="content">
+            <div class="ui left icon input">
+                <input type="text" id="nickInput" class="ui input">
+                <i class="user icon"></i>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui approve blue button">Enter Quiz</div>
+            <div class="ui cancel blue button">Cancel</div>
+        </div>
+    </div>
+
+    <div id="sbModal" class="iu modal"></div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+body {
+    /*background: url("https://wallpaperscraft.com/image/triangle_light_dark_88542_1920x1080.jpg");*/
+    background-image: url("../resources/background.png");
+    background-size: cover;
+}
+
+#headerDiv {
+    margin-top: 5px;
+    text-align: center;
+}
+
+#headerImg {
+    width: 50%;
+    height: 100%;
+}
+
+#headerText {
+    color: white;
+    font-size: 20px;
+    text-shadow: -2px 0 steelblue, 0 2px steelblue, 2px 0 steelblue, 0 -2px steelblue;
+}
+
+.clear {
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+}
+
+#answer1, #answer2, #answer3, #answer4 {
+    border: 1px solid black;
+    margin: 1px;
+}
+
+#answer1, #answer2 {
+    margin-bottom: 5px;
+}
