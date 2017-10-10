@@ -2,7 +2,7 @@ $(document).ready(function () {
     const link = window.location.href,
         quizId = link.substring(link.indexOf("qId") + 4),
         tableBody = $("#tableBody");
-    QuizREST.getQuiz(quizId, function (data) {
+    RESTQuiz.getQuiz(quizId, function (data) {
         tableBody.empty();
         console.log(data.players);
         for (var i = 0; i < data.players.length; i++) {

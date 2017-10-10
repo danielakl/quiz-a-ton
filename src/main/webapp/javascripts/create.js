@@ -173,7 +173,7 @@ $(document).ready(function () {
     }
 
     $("#submitBtn").click(function () {
-        QuizREST.postQuiz(quizObject, function () {
+        RESTQuiz.createQuiz(quizObject, function () {
             window.location = "http://localhost:8080/ProjectQuiz";
         })
     });

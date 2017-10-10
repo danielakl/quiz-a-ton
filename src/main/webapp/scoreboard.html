@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="image/png" href="resources/favicon.png"/>
-    <title>Title</title>
+    <title>Scoreboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
     <link rel="stylesheet" href="stylesheets/style.css">
     <script
@@ -11,20 +11,21 @@
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-    <script src="javascripts/tools/Countdown.js"></script>
-    <script src="javascripts/tools/QuizREST.js"></script>
-    <script src="javascripts/play.js"></script>
+    <script src="javascripts/util/RESTQuiz.js"></script>
+    <script src="javascripts/scoreboard.js"></script>
 </head>
 <body>
 <br>
     <div class="ui raised container">
-        <div id="mainSegment" class="ui segment">
-            <h1 class="ui blue massive header">The Quiz will begin in
-                <span id="cdMinutes">...</span>
-                <span id="cdSeconds">...</span> <br>Get Ready!
-            </h1>
-
-        </div>
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th class="ui blue header">Nickname</th>
+                    <th class="ui blue header">Score</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
     </div>
 
 </body>

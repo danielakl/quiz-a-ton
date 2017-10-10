@@ -9,7 +9,7 @@ $(document).ready(function () {
 
     function updateQuizzes() {
         quizzes = [];
-        QuizREST.getQuizzes(function (data) {
+        RESTQuiz.getQuizzes(function (data) {
             $.each(data, function (key, val) {
                 quizzes.push(val);
             });
@@ -76,7 +76,7 @@ $(document).ready(function () {
 
     // Function that is called when trying to enter a quiz
     function enterQuiz(quizId) {
-        QuizREST.getQuiz(quizId, function (data) {
+        RESTQuiz.getQuiz(quizId, function (data) {
             var players = data.players;
             var found = false;
             var nick = $("#nickInput").val();
@@ -101,7 +101,7 @@ $(document).ready(function () {
                         nickname: nick
                     }]
                 };
-                QuizREST.patchQuiz(quizId, quiz, function () {
+                RESTQuiz.partiallyUpdateQuiz(quizId, quiz, function () {
                     window.location = "http://localhost:8080/ProjectQuiz/play.html?qId=" + quizId + "nick=" + nick;
                 });
             }

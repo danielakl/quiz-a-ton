@@ -52,7 +52,7 @@ function increaseScore() {
             score: quiz.players[playerIndex].score + 1
         }]
     };
-    QuizREST.patchQuiz(quizId, patchQuiz, function () {
+    RESTQuiz.partiallyUpdateQuiz(quizId, patchQuiz, function () {
         getUpdatedQuizAndQuestions();
     });
 }
@@ -70,7 +70,7 @@ function findPlayerIndex() {
 
 //gets the updates quiz and its questions from server
 function getUpdatedQuizAndQuestions() {
-    QuizREST.getQuiz(quizId, function (data) {
+    RESTQuiz.getQuiz(quizId, function (data) {
         quiz = data;
         questions = quiz.questions;
     });
@@ -109,7 +109,7 @@ function displayQuestion(questionIndex) {
             if ((questionIndex === questions.length - 1)) {
                 window.open("http://localhost:8080/ProjectQuiz/scoreboard.html?qId=" + quizId, "_blank");
                 setTimeout(function () {
-                    QuizREST.deleteQuiz(quizId, function () {
+                    RESTQuiz.deleteQuiz(quizId, function () {
                         window.location = "http://localhost:8080/ProjectQuiz";
                     });
                 }, 15000);
