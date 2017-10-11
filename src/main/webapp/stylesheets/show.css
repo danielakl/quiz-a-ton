@@ -1,5 +1,5 @@
 .ui.raised.container{
-    margin-top: 5vh;
+    padding-top: 5vh;
 }
 
 span:nth-last-of-type(2) {
@@ -10,9 +10,9 @@ span {
     font-size: 0.85em;
 }
 
-td {
-    text-transform: capitalize;
-}
+/*td {*/
+    /*text-transform: capitalize;*/
+/*}*/
 
 #quizBox {
     min-height: 200px;
@@ -20,4 +20,12 @@ td {
 
 p {
     display: inline-block;
+}
+
+.ui.table {
+    font-size: 1.2em;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }

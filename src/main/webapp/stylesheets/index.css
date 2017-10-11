@@ -1,6 +1,5 @@
 body {
     background-color: #e1e1e1;
-    height: 20%;
 }
 
 h1.ui.header {
@@ -75,6 +74,6 @@ h1.ui.header {
     z-index: 1;             /* Header in front of images */
     position: relative;
     text-align: center;
-    margin-top: 40vh;
+    padding-top: 40vh;
 }
   

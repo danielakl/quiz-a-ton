@@ -30,14 +30,14 @@
 
 <div class="ui raised container">
     <header class="ui message">
-        <a class="ui blue circular right floated huge icon button" href="show.html">
+        <a class="ui orange circular right floated huge icon button" href="show.html">
             <i class="home icon"></i>
         </a>
         <h1 class="ui header">Quiz-A-Ton</h1>
         <p>Here you can create your very own Quiz</p>
     </header>
 
-    <div class="ui segment" style="height: 100%">
+    <div class="ui secondary segment" style="height: 100%">
         <div class="ui top attached tabular menu">
             <div id="generalItem" class="active item">
                 <div class="ui header">General</div>
@@ -68,16 +68,16 @@
         </div>
         <!--QUESTIONs-->
         <div id="questionTab" class="ui bottom attached tab segment">
-            <h1 class="ui header">Questions</h1>
+            <!--<h1 class="ui large header">Questions</h1>-->
             <!--<div class="ui segment">-->
             <!--<div id="questionList" class="ui divided list"></div>-->
             <!--</div>-->
             <table class="ui table">
                 <thead>
                 <tr>
-                    <th class="ui header">Question</th>
-                    <th class="ui header">Correct</th>
-                    <th class="ui header">Change</th>
+                    <th class="ui small header">Question</th>
+                    <th class="ui small header">Correct</th>
+                    <th class="ui small header">Change</th>
                 </tr>
                 </thead>
                 <tbody id="tableBody"></tbody>
@@ -106,8 +106,8 @@
             </div>
             <button id="submitBtn" class="ui blue circular fluid button">Submit Quiz</button>
         </div>
-        <button id="backBtn" class="ui blue circular disabled button">Back</button>
-        <button id="nextBtn" class="ui blue circular button">Next</button>
+        <button id="backBtn" class="ui circular disabled button">Back</button>
+        <button id="nextBtn" class="ui secondary circular button">Next</button>
     </div>
 </div>
 
@@ -177,8 +177,8 @@
         </form>
     </div>
     <div class="actions">
-        <div class="ui approve blue button">Add</div>
-        <div class="ui cancel blue button">Cancel</div>
+        <div class="ui approve primary button">Add</div>
+        <div class="ui cancel secondary button">Cancel</div>
     </div>
 </div>
 
