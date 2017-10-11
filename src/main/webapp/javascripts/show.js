@@ -34,7 +34,8 @@ function reloadQuizTable() {
                                 if (error) {
                                     console.log(error);
                                 }
-                            });
+                            }
+                        );
                         window.location.href = "http://localhost:8080/quiz/quiz.html?qid=" + quizId + "&nick=" + nickname;
                         return true;
                     }
@@ -73,11 +74,11 @@ function insertData(data) {
         const status = getTimeStatus(element);
 
         quizTable.append('<tr class="' + status.color + '">\n' +
-            '                 <td>' + element.name + '</td>\n' +
-            '                 <td><i class="user circle outline icon"></i>' + element.playerList.length + '</td>\n' +
-            '                 <td><i class="hourglass end icon"></i>' + status.timeLeft + '</td>\n' +
-            '                 <td><i class="help icon"></i>' + element.questions.length + '</td>\n' +
-            '                 <td class="center aligned collapsing">\n' +
+            '                 <td class="four wide">' + element.name + '</td>\n' +
+            '                 <td class="two wide"><i class="user circle outline icon"></i>' + element.playerList.length + '</td>\n' +
+            '                 <td class="four wide"><i class="hourglass end icon"></i>' + status.timeLeft + '</td>\n' +
+            '                 <td class="two wide"><i class="help icon"></i>' + element.questions.length + '</td>\n' +
+            '                 <td class="four wide">\n' +
             '                     <button value="' + element.id + '" class="ui circular button joinButton">Join</button>\n' +
             '                     <button value="' + element.id + '" class="ui circular button scoreboardButton">Scoreboard</button>\n' +
             '                 </td>\n' +
