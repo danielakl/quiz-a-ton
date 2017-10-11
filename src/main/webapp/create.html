@@ -9,6 +9,9 @@
     <!-- External stylesheets -->
     <link rel="stylesheet" href="stylesheets/lib/semantic.min.css">
 
+    <!--Internal stylesheets-->
+    <link rel="stylesheet" href="stylesheets/create.css">
+
     <!-- External libraries -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -26,12 +29,13 @@
 <body>
 
 <div class="ui raised container">
-    <!--Home button-->
-    <a href="show.html" target="_self">
-        <button id="homeBtn" class="ui blue circle button"><i class="ui icon home"></i>Home</button>
-    </a>
-
-    <br>
+    <header class="ui message">
+        <a class="ui blue circular right floated huge icon button" href="show.html">
+            <i class="home icon"></i>
+        </a>
+        <h1 class="ui header">Quiz-A-Ton</h1>
+        <p>Here you can create your very own Quiz</p>
+    </header>
 
     <div class="ui segment" style="height: 100%">
         <div class="ui top attached tabular menu">

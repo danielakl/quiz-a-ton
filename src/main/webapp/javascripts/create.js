@@ -133,7 +133,7 @@ $(document).ready(function () {
     function updateList() {
         tableBody.html("");
         for (var i = 0; i < questions.length; i++) {
-            tableBody.append("<tr><td>" + questions[i].question + "</td><td>" + questions[i].answers[questions[i].correctIndex] + "</td><td><button class='deleteBtn ui blue compact button' value='" + i + "'>delete</button></td></tr>");
+            tableBody.append("<tr><td>" + questions[i].question + "</td><td>" + questions[i].answers[questions[i].correctAnswerIndex] + "</td><td><button class='deleteBtn ui blue compact button' value='" + i + "'>delete</button></td></tr>");
         }
 
         //delete a question
