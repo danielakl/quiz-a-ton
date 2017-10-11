@@ -16,19 +16,30 @@ function reloadQuizTable() {
 
             // Add join button listeners.
             $(".joinButton").on("click", function () {
-                const nickname = $("#nickname").val();
-                RESTQuiz.partiallyUpdateQuiz($(this).val(),
-                    {
-                        playerList: [{
-                            nickname: nickname,
-                            points: 0
-                        }]
-                    }, function (data, error, textStatus, jqXHR) {
-                        if (error) {
-                            console.log(error);
-                        }
-                    });
-                window.location.href = "http://localhost:8080/quiz/quiz.html?qid=" + $(this).val() + "&nick=" + nickname;
+                var quizId = $(this).val();
+                $('#nickModal').modal({
+                    closable: true,
+                    onDeny: function () {
+                        return true;
+                    },
+                    onApprove: function () {
+                        const nickname = $("#nickInput").val();
+                        RESTQuiz.partiallyUpdateQuiz($(this).val(),
+                            {
+                                playerList: [{
+                                    nickname: nickname,
+                                    points: 0
+                                }]
+                            }, function (data, error, textStatus, jqXHR) {
+                                if (error) {
+                                    console.log(error);
+                                }
+                            });
+                        window.location.href = "http://localhost:8080/quiz/quiz.html?qid=" + quizId + "&nick=" + nickname;
+                        return true;
+                    }
+                }).modal("show");
+
             });
 
             // Add scoreboard button listeners.
