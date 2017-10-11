@@ -2,6 +2,10 @@
     margin-top: 5vh;
 }
 
+.ui.message p {
+    display: inline-block;
+}
+
 input[type="text"],
 #summaryName,
 #summaryAuthor,

@@ -176,7 +176,7 @@ $(document).ready(function () {
 
     $("#submitBtn").click(function () {
         RESTQuiz.createQuiz(quizObject, function () {
-            // window.location = "show.html";
+            window.location = "show.html";
         })
     });
 
