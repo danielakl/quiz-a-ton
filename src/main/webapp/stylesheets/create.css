@@ -1,3 +1,16 @@
 .ui.raised.container{
     margin-top: 5vh;
 }
+
+input[type="text"],
+#summaryName,
+#summaryAuthor,
+#summaryList {
+    text-transform: capitalize;
+}
+
+#generalItem:hover,
+#questionItem:hover,
+#summaryItem:hover {
+    cursor: pointer;
+}
