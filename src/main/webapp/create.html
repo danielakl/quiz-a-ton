@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz-A-Ton</title>
+
+    <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png"/>
+
+    <!-- External stylesheets -->
+    <link rel="stylesheet" href="stylesheets/lib/semantic.min.css">
+
+    <!-- External libraries -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+    </script>
+    <script defer src="javascripts/lib/semantic.min.js"></script>
+
+    <!-- Internal libraries -->
+    <script src="javascripts/util/RESTQuiz.js"></script>
+
+    <script defer src="javascripts/create.js"></script>
+
+
+</head>
+<body>
+
+<div class="ui raised container">
+    <!--Home button-->
+    <a href="show.html" target="_self">
+        <button id="homeBtn" class="ui blue circle button"><i class="ui icon home"></i>Home</button>
+    </a>
+
+    <br>
+
+    <div class="ui segment" style="height: 100%">
+        <div class="ui top attached tabular menu">
+            <div id="generalItem" class="active item">
+                <div class="ui blue header">General</div>
+            </div>
+            <div id="questionItem" class="item">
+                <div class="ui blue header">Questions</div>
+            </div>
+            <div id="summaryItem" class="item">
+                <div class="ui blue header">Summary</div>
+            </div>
+        </div>
+        <!--GENERAL-->
+        <div id="generalTab" class="ui bottom attached active tab segment">
+            <form class="ui form">
+                <div class="field">
+                    <label>The Quiz Name</label>
+                    <input type="text" required placeholder="QuizName" name="quizName" id="nameInput">
+                </div>
+                <div class="field">
+                    <label>Author of quiz</label>
+                    <input type="text" required placeholder="Name of creator" id="authorInput">
+                </div>
+                <div class="field">
+                    <label>Date and Time</label>
+                    <input type="datetime-local" required id="dateInput">
+                </div>
+            </form>
+        </div>
+        <!--QUESTIONs-->
+        <div id="questionTab" class="ui bottom attached tab segment">
+            <h1 class="ui blue header">Questions</h1>
+            <!--<div class="ui segment">-->
+            <!--<div id="questionList" class="ui divided list"></div>-->
+            <!--</div>-->
+            <table class="ui table">
+                <thead>
+                <tr>
+                    <th class="ui blue header">Question</th>
+                    <th class="ui blue header">Correct</th>
+                    <th class="ui blue header">Change</th>
+                </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+            <button id="newQBtn" class="ui blue circular fluid button">New Question</button>
+        </div>
+        <!--SUMMARY-->
+        <div id="summaryTab" class="ui bottom attached tab segment">
+            <div class="ui segments">
+                <div class="ui segment">
+                    <h1 class="ui small blue header">Quiz Name</h1>
+                    <p id="summaryName"></p>
+                </div>
+                <div class="ui segment">
+                    <h1 class="ui small blue header">Author</h1>
+                    <p id="summaryAuthor"></p>
+                </div>
+                <div class="ui segment">
+                    <h1 class="ui small blue header">Start Time</h1>
+                    <p id="summaryDate"></p>
+                </div>
+                <div class="ui segment">
+                    <h1 class="ui small blue header">Questions</h1>
+                    <div id="summaryList" class="ui list"></div>
+                </div>
+            </div>
+            <button id="submitBtn" class="ui blue circular fluid button">Submit Quiz</button>
+        </div>
+        <button id="backBtn" class="ui blue circular disabled button">Back</button>
+        <button id="nextBtn" class="ui blue circular button">Next</button>
+    </div>
+</div>
+
+<!--Modal-->
+<div class="ui modal">
+    <div class="header"><h1 class="ui blue header">Add Question</h1></div>
+    <div class="content">
+        <form id="myForm" class="ui form">
+            <h4 class="ui dividing blue header">Info</h4>
+            <div class="field">
+                <label>Question</label>
+                <input required type="text" id="questionInput">
+            </div>
+            <div class="field">
+                <label>Duration in seconds</label>
+                <input required type="number" id="durationInput">
+            </div>
+            <div class="field">
+                <label>Image URL(optional)</label>
+                <input type="url" id="urlInput">
+            </div>
+            <h4 class="ui dividing blue header">Answers</h4>
+            <div class="field">
+                <label>Number of Answers </label>
+            </div>
+            <div class="fields">
+                <div class="field">
+                    <label>2:</label>
+                </div>
+                <div class="field">
+                    <input type="radio" class="NrARadio" name="NrARadio" value="2">
+                </div>
+                <div class="field">
+                    <label> 4:</label>
+                </div>
+                <div class="field">
+                    <input type="radio" class="NrARadio" name="NrARadio" value="4" checked>
+                </div>
+            </div>
+            <div class="fields">
+                <div class="field">
+                    <label>Answer 1:</label>
+                    <input type="text" id="answer1" placeholder="Answer 1" required>
+                </div>
+                <div class="field">
+                    <label>Answer 2:</label>
+                    <input type="text" id="answer2" placeholder="Answer 2" required>
+                </div>
+                <div class="field">
+                    <label>Answer 3:</label>
+                    <input type="text" id="answer3" placeholder="Answer 3" required>
+                </div>
+                <div class="field">
+                    <label>Answer 4:</label>
+                    <input type="text" id="answer4" placeholder="Answer 4" required>
+                </div>
+            </div>
+            <div class="field">
+                <label>The Correct Answer</label>
+                <select name="correctAnswer" id="correctAnswer">
+                    <option value="1">Answer 1</option>
+                    <option value="2">Answer 2</option>
+                    <option value="3">Answer 3</option>
+                    <option value="4">Answer 4</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui approve blue button">Add</div>
+        <div class="ui cancel blue button">Cancel</div>
+    </div>
+</div>
+
+</body>
+</html>
