@@ -89,8 +89,8 @@ $(document).ready(function () {
                 questions.push(
                     {
                         question: $("#questionInput").val(),
-                        duration: $("#durationInput").val() * 1000,
-                        imageUrl: $("#urlInput").val(),
+                        duration: $("#durationInput").val(),
+                        imageURL: $("#urlInput").val(),
                         answers: [answer1.val(), answer2.val(), answer3.val(), answer4.val()],
                         correctAnswerIndex: (correctAnswer.val() - 1),
                         points: 1
@@ -166,11 +166,11 @@ $(document).ready(function () {
     //Updates the summary
     function updateSummary() {
         $("#summaryName").html(quizObject.name);
-        $("#summaryAuthor").html(quizObject.author);
+        $("#summaryAuthor").html(quizObject.creator);
         $("#summaryDate").html(quizObject.startTime);
         $("#summaryList").html("");
         for (var i = 0; i < questions.length; i++) {
-            $("#summaryList").append("<div class='item'><div class='header'>" + questions[i].question + "</div>" + questions[i].answers[questions[i].correctIndex] + "</div>");
+            $("#summaryList").append("<div class='item'><div class='header'>" + questions[i].question + "</div>" + questions[i].answers[questions[i].correctAnswerIndex] + "</div>");
         }
     }
 
