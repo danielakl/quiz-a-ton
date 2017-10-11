@@ -1,3 +1,7 @@
 .ui.raised.container{
     padding-top: 5vh;
 }
+
+.ui.table {
+    font-size: 1.2em;
+}

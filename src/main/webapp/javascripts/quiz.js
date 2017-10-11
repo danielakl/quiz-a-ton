@@ -120,11 +120,15 @@ function showScoreboard() {
     const scoreboard = $("#scoreboard");
     RESTQuiz.getQuiz(quizId, function (data, error, textStatus, jqXHR) {
         if (!error) {
-            $.each(data.playerList, function (index, element) {
+            const playerList = data.playerList.sort(function(player1, player2) {
+                return player2.points - player1.points;
+            });
+
+            $.each(playerList, function (index, player) {
                 scoreboard.append(
                     '<tr>\n' +
-                    '    <td>' + element.nickname + '</td>\n' +
-                    '    <td>' + element.points + '</td>\n' +
+                    '    <td>' + player.nickname + '</td>\n' +
+                    '    <td>' + player.points + '</td>\n' +
                     '</tr>');
             });
             $(".ui.modal").modal("show");

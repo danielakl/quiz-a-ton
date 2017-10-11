@@ -10,7 +10,7 @@ setInterval(loadScoreboard, 5000);
 function displayQuizInfo() {
     RESTQuiz.getQuiz(quizId, function (data, error, textStatus, jqXHR) {
         if (!error) {
-            $("p").text("For \"" + data.name + "\".");
+            $("p").text("For \"" + data.name + "\" quiz.");
         } else {
             console.log(error);
         }
@@ -23,11 +23,15 @@ function displayQuizInfo() {
 function loadScoreboard() {
     RESTQuiz.getQuiz(quizId, function (data, error, textStatus, jqXHR) {
         if (!error) {
+            const playerList = data.playerList.sort(function(player1, player2) {
+                return player2.points - player1.points;
+            });
+
             const scoreboard = $("#scoreboard");
 
             // Rebuild scoreboard.
             scoreboard.empty();
-            $.each(data.playerList, function (index, player) {
+            $.each(playerList, function (index, player) {
                 scoreboard.append(
                     '<tr>\n' +
                     '    <td>' + player.nickname + '</td>\n' +
@@ -35,7 +39,6 @@ function loadScoreboard() {
                     '</tr>'
                 );
             });
-
         } else {
             console.log(error);
         }
