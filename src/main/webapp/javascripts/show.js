@@ -24,7 +24,7 @@ function reloadQuizTable() {
                     },
                     onApprove: function () {
                         const nickname = $("#nickInput").val();
-                        RESTQuiz.partiallyUpdateQuiz($(this).val(),
+                        RESTQuiz.partiallyUpdateQuiz(quizId,
                             {
                                 playerList: [{
                                     nickname: nickname,
