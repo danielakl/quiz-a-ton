@@ -36,7 +36,7 @@ function reloadQuizTable() {
                                 }
                             }
                         );
-                        window.location.href = "http://localhost:8080/quiz/quiz.html?qid=" + quizId + "&nick=" + nickname;
+                        window.location.href = "http://localhost:8080/quiz/lobby.html?qid=" + quizId + "&nick=" + nickname;
                         return true;
                     }
                 }).modal("show");

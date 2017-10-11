@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz-A-Ton</title>
+
+    <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png"/>
+
+    <!-- External stylesheets -->
+    <link rel="stylesheet" href="stylesheets/lib/semantic.min.css">
+
+    <!-- Page specific stylesheets -->
+    <link rel="stylesheet" href="stylesheets/lobby.css">
+
+    <!-- External libraries -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+    </script>
+    <script src="javascripts/lib/semantic.min.js"></script>
+
+    <!-- Internal libraries -->
+    <script src="javascripts/util/RESTQuiz.js"></script>
+    <script src="javascripts/util/Countdown.js"></script>
+    <script src="javascripts/util/URL.js"></script>
+
+    <!-- Page specific scripts -->
+    <script defer src="javascripts/lobby.js"></script>
+</head>
+<body>
+
+<div class="ui raised container">
+
+    <div class="ui segments">
+        <div class="ui segment">
+            <div class="ui massive header">The Quiz will begin in
+                <span id="cdMinutes">...</span>
+                <span id="cdSeconds">...</span> <br>Get Ready!
+            </div>
+        </div>
+        <div class="ui segment">
+            <div class="ui small header">Current players:</div>
+            <div class="ui list"></div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
