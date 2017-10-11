@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @author Daniel Klock
- * @version 0.1.0
+ * @version 1.1.0
  */
 public class QuestionTest {
     private static final Question question = new Question();
@@ -20,8 +20,11 @@ public class QuestionTest {
     public void setUp() throws Exception {
         question.setId(1);
         question.setQuestion("Quiz question.");
+        question.setImageURL("https://www.w3schools.com/css/img_fjords.jpg");
         question.setAnswers(answers);
+        question.setPoints(2);
         question.setCorrectAnswerIndex(0);
+        question.setDuration(10);
     }
 
     /**
@@ -43,6 +46,15 @@ public class QuestionTest {
     }
 
     /**
+     * If this test passes the {@code setImageURL()} method also works.
+     * @throws Exception - Throws any exceptions.
+     */
+    @Test
+    public void getImageURL() throws Exception {
+        Assert.assertEquals("https://www.w3schools.com/css/img_fjords.jpg", question.getImageURL());
+    }
+
+    /**
      * If this test passes the {@code setAnswers()} method also works.
      * @throws Exception - Throws any exceptions.
      */
@@ -52,11 +64,29 @@ public class QuestionTest {
     }
 
     /**
+     * If this test passes the {@code setPoints()} method also works.
+     * @throws Exception - Throws any exceptions.
+     */
+    @Test
+    public void getPoints() throws Exception {
+        Assert.assertEquals(2, question.getPoints());
+    }
+
+    /**
      * If this test passes the {@code setCorrectAnswerIndex()} method also works.
      * @throws Exception - Throws any exceptions.
      */
     @Test
     public void getCorrectAnswerIndex() throws Exception {
         Assert.assertEquals(0, question.getCorrectAnswerIndex());
+    }
+
+    /**
+     * If this test passes the {@code setDuration()} method also works.
+     * @throws Exception - Throws any exceptions.
+     */
+    @Test
+    public void getDuration() throws Exception {
+        Assert.assertEquals(10, question.getDuration());
     }
 }

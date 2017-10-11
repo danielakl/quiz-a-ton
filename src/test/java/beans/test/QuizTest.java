@@ -1,5 +1,6 @@
 package beans.test;
 
+import beans.Player;
 import beans.Question;
 import beans.Quiz;
 import org.junit.Assert;
@@ -7,23 +8,31 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * @author Daniel Klock
- * @version 0.1.0
+ * @version 1.1.0
  */
 public class QuizTest {
-    private final Quiz quiz = new Quiz();
-    private final Question question = new Question();
-    private final List<Question> questions = new ArrayList<>();
+    private static final Quiz quiz = new Quiz();
+    private static final Question question = new Question();
+    private static final Player player = new Player();
+    private static final List<Question> questions = new ArrayList<>();
+    private static final List<Player> players = new ArrayList<>();
+    private static final long nowInMills = System.currentTimeMillis();
 
     @Before
     public void setUp() throws Exception {
         quiz.setId(1);
-        quiz.setDuration(100);
+        quiz.setName("Quiz");
+        quiz.setCreator("Daniel");
+        quiz.setStartTime(new Date(nowInMills));
         questions.add(question);
         quiz.setQuestions(questions);
+        players.add(player);
+        quiz.setPlayerList(players);
     }
 
     /**
@@ -36,12 +45,30 @@ public class QuizTest {
     }
 
     /**
-     * If this test passes the {@code setDuration()} method also works.
+     * If this test passes the {@code setName()} method also works.
      * @throws Exception - Throws any exceptions.
      */
     @Test
-    public void getDuration() throws Exception {
-        Assert.assertEquals(100, quiz.getDuration());
+    public void getName() throws Exception {
+        Assert.assertEquals("Quiz", quiz.getName());
+    }
+
+    /**
+     * If this test passes the {@code setCreator()} method also works.
+     * @throws Exception - Throws any exceptions.
+     */
+    @Test
+    public void getCreator() throws Exception {
+        Assert.assertEquals("Daniel", quiz.getCreator());
+    }
+
+    /**
+     * If this test passes the {@code setStartTime()} method also works.
+     * @throws Exception - Throws any exceptions.
+     */
+    @Test
+    public void getStartTime() throws Exception {
+        Assert.assertEquals(new Date(nowInMills), quiz.getStartTime());
     }
 
     /**
@@ -51,5 +78,14 @@ public class QuizTest {
     @Test
     public void getQuestions() throws Exception {
         Assert.assertArrayEquals(questions.toArray(), quiz.getQuestions().toArray());
+    }
+
+    /**
+     * If this test passes the {@code setPlayerList()} method also works.
+     * @throws Exception - Throws any exceptions.
+     */
+    @Test
+    public void getPlayerList() throws Exception {
+        Assert.assertArrayEquals(players.toArray(), quiz.getPlayerList().toArray());
     }
 }
