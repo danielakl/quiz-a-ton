@@ -55,6 +55,7 @@ function insertQuestion(question) {
             answer.each(function (index) {
                 if (question.answers[index]) {
                     $(this).removeClass("disabled");
+                    $(this).prop('onclick',null).off('click');
                     $(this).text(question.answers[index]);
                     $(this).on("click", function () {
                         submit(index, question);
