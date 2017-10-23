@@ -59,14 +59,27 @@ $(document).ready(function () {
 
             if (currentTab === 0) {
                 backBtn.addClass("disabled");
-                nextBtn.removeClass("disabled")
+                nextBtn.text("Next");
+                $("#nextBtn").unbind();
+                $("#nextBtn").click(function () {
+                    setContent(currentTab + 1);
+                });
             } else if (currentTab === 2) {
                 updateSummary();
-                nextBtn.addClass("disabled");
                 backBtn.removeClass("disabled");
+                nextBtn.text("Submit");
+                $("#nextBtn").click(function () {
+                    RESTQuiz.createQuiz(quizObject, function () {
+                        window.location = "show.html";
+                    })
+                });
             } else {
+                $("#nextBtn").unbind();
+                $("#nextBtn").click(function () {
+                    setContent(currentTab + 1);
+                });
                 backBtn.removeClass("disabled");
-                nextBtn.removeClass("disabled");
+                nextBtn.text("Next");
             }
         }
     }
@@ -173,12 +186,6 @@ $(document).ready(function () {
             $("#summaryList").append("<div class='item'><div class='header'>" + questions[i].question + "</div>" + questions[i].answers[questions[i].correctAnswerIndex] + "</div>");
         }
     }
-
-    $("#submitBtn").click(function () {
-        RESTQuiz.createQuiz(quizObject, function () {
-            window.location = "show.html";
-        })
-    });
 
 }); //end document ready
 
