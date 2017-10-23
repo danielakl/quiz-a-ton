@@ -105,7 +105,7 @@ $(document).ready(function () {
                         duration: $("#durationInput").val(),
                         imageURL: $("#urlInput").val(),
                         answers: [answer1.val(), answer2.val(), answer3.val(), answer4.val()],
-                        correctAnswerIndex: (correctAnswer.val() - 1),
+                        correctAnswerIndex: (correctAnswer.val()),
                         points: 1
                     });
                 updateList();
@@ -127,18 +127,18 @@ $(document).ready(function () {
             answer4.attr("disabled", true);
             answer4.attr("placeholder", "Disabled");
             answer4.val("");
-            correctAnswer.html("<option value=\"1\">Answer 1</option>\n" +
-                "<option value=\"2\">Answer 2</option>");
+            correctAnswer.html("<option value=\"0\">Answer 1</option>\n" +
+                "<option value=\"1\">Answer 2</option>");
         } else {
             answer3.attr("disabled", false);
             answer3.attr("placeholder", "Answer 3");
             answer4.attr("disabled", false);
             answer4.attr("placeholder", "Answer 4");
 
-            correctAnswer.html("<option value=\"1\">Answer 1</option>\n" +
-                "<option value=\"2\">Answer 2</option>\n" +
-                "<option value=\"3\">Answer 3</option>\n" +
-                "<option value=\"4\">Answer 4</option>");
+            correctAnswer.html("<option value=\"0\">Answer 1</option>\n" +
+                "<option value=\"1\">Answer 2</option>\n" +
+                "<option value=\"2\">Answer 3</option>\n" +
+                "<option value=\"3\">Answer 4</option>");
         }
     });
 
